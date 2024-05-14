@@ -5,7 +5,7 @@ const app = express();
 
 app.get("/now", (request, response) => {
     const today = new Date();
-    response.send(today.getTime().toLocaleString("de-CH"));
+    response.send(today.getTime().toLocaleString("de-CH", { timeZone: request.params.tz }));
 });
 
 app.get("/zli", (request, response) => {
