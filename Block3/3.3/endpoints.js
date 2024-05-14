@@ -17,7 +17,7 @@ app.get("/zli", (request, response) => {
 
 app.get("/name", (request, response) => {
     const namesListJson = JSON.parse(fs.readFileSync("namesList.json", "utf8"));
-    const randomNumber = Math.floor(Math.random() * 10);
+    const randomNumber = Math.floor(Math.random() * namesListJson.length);
     response.send(namesListJson[randomNumber]);
 });
 app.post("/names", (request, response) => {
