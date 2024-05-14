@@ -71,6 +71,19 @@ app.get("/xml", (request, response) => {
     response.sendFile("C:/Users/saids/OneDrive - bbw.ch/Desktop/Schule/ÜKs/Files/ZLI_ÜK_M295/M295/Block3/3.3/file.xml");
 });
 
+//me
+app.get("/me", (request, response) => {
+    const meObj = {
+        name: "Said",
+        surname: "Simokovic",
+        age: 17,
+        residence: "Kloten ZH",
+        eye_color: "brown"
+    }
+
+    response.send(meObj);
+});
+
 /*
 // Listen on port 3000
 */
