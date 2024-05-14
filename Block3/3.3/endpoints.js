@@ -66,6 +66,11 @@ app.get("/secret", (request, response) => {
     response.status(403).send("This page is forbidden. (error 403)");
 });
 
+// xml
+app.get("/xml", (request, response) => {
+    response.sendFile("C:/Users/saids/OneDrive - bbw.ch/Desktop/Schule/ÜKs/Files/ZLI_ÜK_M295/M295/Block3/3.3/file.xml");
+});
+
 /*
 // Listen on port 3000
 */
