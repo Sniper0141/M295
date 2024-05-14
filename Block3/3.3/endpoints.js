@@ -46,6 +46,11 @@ app.get("/html", (request, response) => {
     response.sendFile("C:/Users/saids/OneDrive - bbw.ch/Desktop/Schule/ÜKs/Files/ZLI_ÜK_M295/M295/Block3/3.3/haha.html");
 });
 
+// image
+app.get("/image", (request, response) => {
+    response.sendFile("C:/Users/saids/OneDrive - bbw.ch/Desktop/Schule/ÜKs/Files/ZLI_ÜK_M295/M295/Block3/3.3/bird.jpg")
+});
+
 /*
 // Listen on port 3000
 */
