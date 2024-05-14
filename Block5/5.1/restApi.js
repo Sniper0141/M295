@@ -23,6 +23,7 @@ app.get("/books/:isbn", (request, response) => {
         response.send(bookWithInfo);
     }
     else{
+        console.log("");
         console.log("ERROR 404: The book you are looking for does not exist in our database.");
         response.status(404).send("ERROR 404: The book you are looking for does not exist in our database.");
     }
@@ -32,7 +33,22 @@ app.get("/books/:isbn", (request, response) => {
     console.log(bookWithInfo);
 });
 app.post("/books", (request, response) => {
+    const booksList = JSON.parse(fs.readFileSync("books.json", "utf-8"));
 
+    if(booksList.find(book => book.isbn === request.body.isbn)){
+        console.log("");
+        response.status(409).send("ERROR 409: This book is already in our database.");
+    }
+
+    if(!request.body){
+        console.log("");
+        response.status(400).send("ERROR 400: Faulty input data.");
+    }
+
+    booksList.push(request.body);
+    fs.writeFileSync("books.json", JSON.stringify(booksList));
+
+    response.status(201).send(request.body);
 });
 app.get("/books", (request, response) => {
 
