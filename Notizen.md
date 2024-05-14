@@ -68,3 +68,9 @@ https://www.zli.ch/kurse/2?key=value&key2=value2#anchor
 1. "https" => Protokoll
 2. "www.zli.ch" => Host
 3. 
+
+### Aufgabe Bibliothek API umsetzen (5.1)
+
+``...`` => spread
+``map`` => 
+``filter`` => wendet ein Query an, bei false wird Element ausgelassen
