@@ -65,6 +65,14 @@ app.get("/user-agent", (request, response) => {
 app.get("/secret", (request, response) => {
     response.status(403).send("This page is forbidden. (error 403)");
 });
+app.get("/secret2", (request, response) => {
+    if(request.headers.authorization == "Basic aGFja2VyOjEyMzQ="){
+        response.status(200).send("oge (200)");
+    }
+    else{
+        response.status(401).send("no. (401)");
+    }
+});
 
 // xml
 app.get("/xml", (request, response) => {
