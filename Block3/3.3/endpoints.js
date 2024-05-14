@@ -23,10 +23,17 @@ app.get("/name", (request, response) => {
 app.post("/names", (request, response) => {
     let namesListJson = JSON.parse(fs.readFileSync("namesList.json", "utf8"));
     namesListJson.push(request.query.name);
-    fs.writeFileSync("namesList.json", JSON.stringify(namesListJson))
+    fs.writeFileSync("namesList.json", JSON.stringify(namesListJson));
 
-    response.send('Name "' + request.query.name + '" has been added.')
-    console.log('Name "' + request.query.name + '" has been added.')
+    response.send('Name "' + request.query.name + '" has been added.');
+    console.log('Name "' + request.query.name + '" has been added.');
+});
+app.delete("/names", (request, response) => {
+    let namesListJson = JSON.parse(fs.readFileSync("namesList.json", "utf8"));
+    namesListJson = namesListJson.filter(name => name !== request.query.name);
+    fs.writeFileSync("namesList.json", JSON.stringify(namesListJson));
+    response.send('Name "' + request.query.name + '" has been removed.');
+    console.log('Name "' + request.query.name + '" has been removed.');
 });
 
 app.get("/html", (request, response) => {
