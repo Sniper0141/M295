@@ -2,7 +2,6 @@ import express from 'express';
 
 const port = 3000;
 const app = express();
-const __dirname = import.meta.dirname;
 
 app.get("/now", (request, response) => {
     const today = new Date();
