@@ -51,6 +51,11 @@ app.get("/image", (request, response) => {
     response.sendFile("C:/Users/saids/OneDrive - bbw.ch/Desktop/Schule/ÜKs/Files/ZLI_ÜK_M295/M295/Block3/3.3/bird.jpg")
 });
 
+// teapot
+app.get("/teapot", (request, response) => {
+    response.status(418).send("Im a teapot.");
+});
+
 /*
 // Listen on port 3000
 */
