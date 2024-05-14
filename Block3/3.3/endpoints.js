@@ -25,7 +25,7 @@ app.get("/html", (request, response) => {
     response.sendFile("C:/Users/saids/OneDrive - bbw.ch/Desktop/Schule/ÜKs/Files/ZLI_ÜK_M295/M295/Block3/3.3/haha.html");
 });
 
-// Listen on Port 3000
+// Listen on port 3000
 
 app.listen(port, ()=>{
     console.log(`Endpoints app listening on port ${port}`)
