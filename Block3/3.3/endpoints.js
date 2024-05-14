@@ -53,12 +53,17 @@ app.get("/image", (request, response) => {
 
 // teapot
 app.get("/teapot", (request, response) => {
-    response.status(418).send("Im a teapot.");
+    response.status(418).send("Im a teapot. (error 418)");
 });
 
 // user-agent
 app.get("/user-agent", (request, response) => {
     response.send(request.headers['user-agent']);
+});
+
+// secret
+app.get("/secret", (request, response) => {
+    response.status(403).send("This page is forbidden. (error 403)");
 });
 
 /*
