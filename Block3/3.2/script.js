@@ -6,7 +6,7 @@ let url ="https://app-prod-ws.meteoswiss-app.ch/v1/plzDetail?plz=";
 
 app.get("/:zip", async (browserRequest,response) => {
     const zip = browserRequest.params.zip;
-    const weatherData = await fetch(url+browserRequest.params.zip+"00")
+    const weatherData = await fetch(url+zip+"00")
     const data = await weatherData.json()
         console.log(data);
         response.send(data);})
