@@ -4,6 +4,8 @@ import express, { response } from 'express';
 const port = 3000;
 const app = express();
 
+app.use(express.json());
+
 /*
 // Endpoints
 */
@@ -81,15 +83,12 @@ app.get("/xml", (request, response) => {
 
 //me
 app.get("/me", (request, response) => {
-    const meObj = {
-        name: "Said",
-        surname: "Simokovic",
-        age: 17,
-        residence: "Kloten ZH",
-        eye_color: "brown"
-    }
-
+    const meObj = JSON.parse(fs.readFileSync("me.json", "utf-8"));
     response.send(meObj);
+});
+app.patch("/me", (request, response) => {
+    fs.writeFileSync("me.json", JSON.stringify(request.body));
+    response.status(201).send("The resource has been patched. (201)");
 });
 
 // chuck
@@ -101,9 +100,9 @@ app.get("/chuck", async (request, response) => {
     if(request.query.name){
         joke = joke.replace("Chuck Norris", request.query.name);
     }
-    
+
     response.send(joke);
-})
+});
 
 /*
 // Listen on port 3000
@@ -111,4 +110,4 @@ app.get("/chuck", async (request, response) => {
 
 app.listen(port, ()=>{
     console.log(`Endpoints app listening on port ${port}`)
-})
+});
