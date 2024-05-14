@@ -20,6 +20,14 @@ app.get("/name", (request, response) => {
     const randomNumber = Math.floor(Math.random() * 10);
     response.send(namesListJson[randomNumber]);
 });
+app.post("/names", (request, response) => {
+    let namesListJson = JSON.parse(fs.readFileSync("namesList.json", "utf8"));
+    namesListJson.push(request.query.name);
+    fs.writeFileSync("namesList.json", JSON.stringify(namesListJson))
+
+    response.send('Name "' + request.query.name + '" has been added.')
+    console.log('Name "' + request.query.name + '" has been added.')
+});
 
 app.get("/html", (request, response) => {
     response.sendFile("C:/Users/saids/OneDrive - bbw.ch/Desktop/Schule/ÜKs/Files/ZLI_ÜK_M295/M295/Block3/3.3/haha.html");
