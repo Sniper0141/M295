@@ -2,7 +2,7 @@ import express from 'express';
 
 const port = 3000;
 const app = express();
-const router = express.Router()
+const __dirname = import.meta.dirname;
 
 app.get("/now", (request, response) => {
     const today = new Date();
@@ -53,6 +53,11 @@ app.get("/name", (request, response) => {
     }
 
     response.send(name);
+});
+
+app.get("/html", (request, response) => {
+    
+    response.sendFile("C:/Users/saids/OneDrive - bbw.ch/Desktop/Schule/ÜKs/Files/ZLI_ÜK_M295/M295/Block3/3.3/haha.html");
 });
 
 app.listen(port, ()=>{
