@@ -45,7 +45,7 @@ Beispiele:
 
 ### Rest API 
 
-Rest (**R**epresentational **S**tate **T**ransfer ist ein Entwurfsmuster für HTTP-Schnittstellen.
+Rest **R**epresentational **S**tate **T**ransfer ist ein Entwurfsmuster für HTTP-Schnittstellen.
 
 **CRUD**
 - Create
