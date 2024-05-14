@@ -92,6 +92,19 @@ app.get("/me", (request, response) => {
     response.send(meObj);
 });
 
+// chuck
+app.get("/chuck", async (request, response) => {
+    let jokeResponse = await fetch("https://api.chucknorris.io/jokes/random");
+    const jokeJson = await jokeResponse.json();
+    let joke = jokeJson.value;
+
+    if(request.query.name){
+        joke = joke.replace("Chuck Norris", request.query.name);
+    }
+    
+    response.send(joke);
+})
+
 /*
 // Listen on port 3000
 */
