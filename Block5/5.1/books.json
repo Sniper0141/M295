@@ -1,0 +1,20 @@
+[
+    {
+        "isbn": 9783498038083,
+        "title": "To Kill a Mockingbird",
+        "year": 1960,
+        "author": "Harper Lee"
+    },
+    {
+        "isbn": 9783451360008,
+        "title": "Die Bibel (Einheitsübersetzung)",
+        "year": 2016,
+        "author": "(multiple authors)"
+    },
+    {
+        "isbn": 9783060311170,
+        "title": "The Curious Incident of the Dog in the Night-Time",
+        "year": 2003,
+        "author": "Mark Haddon"
+    }
+]
