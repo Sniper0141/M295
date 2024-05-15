@@ -120,6 +120,21 @@ app.get("/lends/:id", (request, response) => {
     const lendInfo = lendsList.find(lend => lend.id == request.params.id);
     response.send(lendInfo);
 });
+app.post("/lends", (request, response) => {
+    const lendsList = JSON.parse(fs.readFileSync("lends.json", "utf-8"));
+    
+    if(lendsList.find(lend => lend.id == request.body.id)){
+        console.log("");
+        console.log("ERROR 422: Resource with id " + request.body.id + " already exists.");
+        response.status(422).send("ERROR 422: Resource with id " + request.body.id + " already exists.");
+        return;
+    }
+
+    lendsList.push(request.body);
+    
+    fs.writeFileSync("lends.json", JSON.stringify(lendsList));
+    response.status(200).send(request.body);
+});
 
 // Listen on port 3000
 app.listen(port, ()=>{
