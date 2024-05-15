@@ -135,6 +135,29 @@ app.post("/lends", (request, response) => {
     fs.writeFileSync("lends.json", JSON.stringify(lendsList));
     response.status(200).send(request.body);
 });
+app.delete("/lends/:id", (request, response) => {
+    let lendsList = JSON.parse(fs.readFileSync("lends.json", "utf-8"));
+    let turnedInLend = lendsList.find(lend => lend.id == request.params.id)
+
+    if(!turnedInLend){
+        console.log("");
+        console.log("ERROR 404: Resource with id " + request.params.id + " does not exist.");
+        response.status(404).send("ERROR 404: Resource with id " + request.params.id + " does not exist.");
+        return;
+    }
+    if(turnedInLend.returned_at){
+        console.log("");
+        console.log("ERROR 400: Resource with id " + request.params.id + " has already been turned in!");
+        response.status(400).send("ERROR 400: Resource with id " + request.params.id + " has already been turned in!");
+        return;
+    }
+
+    turnedInLend.returned_at = new Date().toLocaleDateString("de-CH");
+    lendsList = lendsList.map(lend => lend.id == request.params.id ? turnedInLend : lend);
+    
+    fs.writeFileSync("lends.json", JSON.stringify(lendsList));
+    response.status(200).send("The resource with id " + request.params.id + " has been turned in.");
+});
 
 // Listen on port 3000
 app.listen(port, ()=>{
