@@ -74,3 +74,9 @@ https://www.zli.ch/kurse/2?key=value&key2=value2#anchor
 ``...`` => spread
 ``map`` => 
 ``filter`` => wendet ein Query an, bei false wird Element ausgelassen
+
+## Tag 3
+
+### Ports
+- http: 80
+- https: 443

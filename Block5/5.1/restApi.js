@@ -37,7 +37,7 @@ app.post("/books", (request, response) => {
 
     if(booksList.find(book => book.isbn === request.body.isbn)){
         console.log("");
-        response.status(409).send("ERROR 409: This book is already in our database.");
+        response.status(409).send("ERROR 409: This book is already in our database. Use PUT to overwrite.");
     }
 
     if(!request.body){
@@ -50,8 +50,31 @@ app.post("/books", (request, response) => {
 
     response.status(201).send(request.body);
 });
-app.get("/books", (request, response) => {
+app.put("/books:isbn", (request, response) => {
+    const booksList = JSON.parse(fs.readFileSync("books.json", "utf-8"));
 
+    if(!request.body || !request.body.isbn || !request.body.title || !request.body.year || !request.body.author){
+        console.log("");
+        response.status(400).send("ERROR 400: Faulty input data.");
+        return
+    }
+    if(request.params.isbn != request.body.isbn){
+        console.log("");
+        response.status(400).send("ERROR 400: ISBN in the URL does not match ISBN in json body.");
+        return
+    }
+
+    if(booksList.find(book => book.isbn === request.body.isbn)){
+        for(let i = 0; i < booksList.length; i++){
+            booksList[i] = request.body;
+        }
+    }
+    else{
+        booksList.push(request.body);
+    }
+
+    fs.writeFileSync("books.json", JSON.stringify(booksList));
+    response.status(201).send(request.body);
 });
 app.get("/books", (request, response) => {
 
