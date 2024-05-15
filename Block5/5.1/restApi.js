@@ -68,7 +68,8 @@ app.put("/books/:isbn", (request, response) => {
         booksList.map(book => book.isbn == request.body.isbn ? request.body : book);
     }
     else{
-        booksList.push(request.body);
+        console.log("");
+        response.status(404).send("ERROR 404: The resource with the ISBN " + request.params.isbn + " does not exist yet.");
     }
 
     fs.writeFileSync("books.json", JSON.stringify(booksList));
@@ -80,8 +81,29 @@ app.delete("/books/:isbn", (request, response) => {
     fs.writeFileSync("books.json", JSON.stringify(booksList));
     response.status(200).send("Resource with ISBN " + request.params.isbn + " has been deleted. (200)");
 });
-app.get("/books", (request, response) => {
+app.patch("/books/:isbn", (request, response) => {
+    const booksList = JSON.parse(fs.readFileSync("books.json", "utf-8"));
 
+    if(!request.body){
+        console.log("");
+        response.status(400).send("ERROR 400: Faulty input data.");
+        return
+    }
+    if(request.body.isbn && request.params.isbn != request.body.isbn){
+        console.log("");
+        response.status(400).send("ERROR 400: ISBN in the URL does not match ISBN in json body.");
+        return
+    }
+
+    if(booksList.find(book => book.isbn == request.body.isbn)){
+        booksList.map(book => book.isbn == request.body.isbn ? request.body : book);
+    }
+    else{
+        booksList.push(request.body);
+    }
+
+    fs.writeFileSync("books.json", JSON.stringify(booksList));
+    response.status(201).send(request.body);
 });
 
 // Listen on port 3000
