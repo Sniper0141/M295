@@ -152,7 +152,7 @@ app.delete("/lends/:id", (request, response) => {
         return;
     }
 
-    turnedInLend.returned_at = new Date().toLocaleDateString("de-CH");
+    turnedInLend.returned_at = new Date().toLocaleString("de-CH");
     lendsList = lendsList.map(lend => lend.id == request.params.id ? turnedInLend : lend);
     
     fs.writeFileSync("lends.json", JSON.stringify(lendsList));
