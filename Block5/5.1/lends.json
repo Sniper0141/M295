@@ -1,0 +1,9 @@
+[
+    {
+        "id": "9d1f68e0-7fb6-4ae0-902c-c4a2d3548886",
+        "customer_id": 1,
+        "isbn": 9783498038083,
+        "borrowed_at": "15.5.2024",
+        "returned_at": null
+    }
+]

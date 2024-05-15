@@ -1,5 +1,6 @@
 import fs from 'fs'
 import express, { response } from 'express';
+import { v4 as uuidv4 } from 'uuid';
 
 const port = 3000;
 const app = express();
@@ -38,6 +39,7 @@ app.post("/books", (request, response) => {
     if(booksList.find(book => book.isbn === request.body.isbn)){
         console.log("");
         response.status(409).send("ERROR 409: This book is already in our database. Use PUT to overwrite.");
+        return;
     }
 
     if(!request.body || !request.body.isbn || !request.body.title || !request.body.year || !request.body.author){
@@ -109,8 +111,18 @@ app.patch("/books/:isbn", (request, response) => {
     response.status(200).send(request.body);
 });
 
+app.get("/lends", (request, response) => {
+    const lendsList = JSON.parse(fs.readFileSync("lends.json", "utf-8"));
+    response.send(lendsList);
+});
+app.get("/lends/:id", (request, response) => {
+    const lendsList = JSON.parse(fs.readFileSync("lends.json", "utf-8"));
+    const lendInfo = lendsList.find(lend => lend.id == request.params.id);
+    response.send(lendInfo);
+});
+
 // Listen on port 3000
 app.listen(port, ()=>{
     console.log("");
-    console.log(`RestAPI app listening on port ${port}`)
+    console.log(`RestAPI app listening on port ${port}`);
 });
