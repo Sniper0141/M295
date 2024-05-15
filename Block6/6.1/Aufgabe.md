@@ -135,4 +135,5 @@ One can be obtained through <a href="https://developer.spotify.com/documentation
 
 The base URI for all Web API requests is `https://api.spotify.com/v1`.
 ```
-Das bedeuted, die meisten Funktionen des API sind nur für Benutzer mit einem Spotify Premium Account. 
+
+> Das bedeuted, die meisten Funktionen des API sind nur für Benutzer mit einem Spotify **Premium Account**. 
