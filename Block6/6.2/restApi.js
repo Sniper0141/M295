@@ -2,11 +2,20 @@ import fs from 'fs'
 import express, { response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import swaggerAutogen from 'swagger-autogen';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger-output.json' with { type: 'json' };
 
 const port = 3000;
 const app = express();
 
+var options = {
+    swaggerOptions: {
+        url: 'localhost:3000/swagger.json'
+    }
+}
+
 app.use(express.json());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
 // Endpoints
 app.get("/books", (request, response) => {
