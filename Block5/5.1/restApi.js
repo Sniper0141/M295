@@ -50,7 +50,7 @@ app.post("/books", (request, response) => {
 
     response.status(201).send(request.body);
 });
-app.put("/books:isbn", (request, response) => {
+app.put("/books/:isbn", (request, response) => {
     const booksList = JSON.parse(fs.readFileSync("books.json", "utf-8"));
 
     if(!request.body || !request.body.isbn || !request.body.title || !request.body.year || !request.body.author){
@@ -64,10 +64,8 @@ app.put("/books:isbn", (request, response) => {
         return
     }
 
-    if(booksList.find(book => book.isbn === request.body.isbn)){
-        for(let i = 0; i < booksList.length; i++){
-            booksList[i] = request.body;
-        }
+    if(booksList.find(book => book.isbn == request.body.isbn)){
+        booksList.map(book => book.isbn == request.body.isbn ? request.body : book);
     }
     else{
         booksList.push(request.body);
