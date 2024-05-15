@@ -122,7 +122,7 @@ app.get("/lends/:id", (request, response) => {
 });
 app.post("/lends", (request, response) => {
     
-    if(!request.body || !request.body.customer_id || !request.body.isbn || !request.body.borrowed_at){
+    if(!request.body || !request.body.customer_id || !request.body.isbn){
         console.log("");
         console.log("ERROR 422: Faulty data.");
         response.status(422).send("ERROR 422: Faulty data.");
@@ -132,6 +132,7 @@ app.post("/lends", (request, response) => {
     const lendsList = JSON.parse(fs.readFileSync("lends.json", "utf-8"));
     let newLend = request.body;
     newLend.id = request.body.id ?? uuidv4();
+    newLend.borrowed_at = request.body.borrowed_at ?? new Date().toLocaleString("de-CH");
 
     if(lendsList.find(lend => lend.id == newLend.id)){
         console.log("");
