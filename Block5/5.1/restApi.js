@@ -42,7 +42,7 @@ app.post("/books", (request, response) => {
 
     if(!request.body || !request.body.isbn || !request.body.title || !request.body.year || !request.body.author){
         console.log("");
-        response.status(422).send("ERROR 400: Faulty input data.");
+        response.status(422).send("ERROR 422: Faulty input data.");
         return;
     }
 
@@ -56,12 +56,12 @@ app.put("/books/:isbn", (request, response) => {
 
     if(!request.body || !request.body.isbn || !request.body.title || !request.body.year || !request.body.author){
         console.log("");
-        response.status(422).send("ERROR 400: Faulty input data.");
+        response.status(422).send("ERROR 422: Faulty input data.");
         return;
     }
     if(request.params.isbn != request.body.isbn){
         console.log("");
-        response.status(400).send("ERROR 400: ISBN in the URL does not match ISBN in json body.");
+        response.status(422).send("ERROR 422: ISBN in the URL does not match ISBN in json body.");
         return;
     }
 
@@ -88,7 +88,7 @@ app.patch("/books/:isbn", (request, response) => {
 
     if(!request.body || !request.body.isbn || !request.body.title || !request.body.year || !request.body.author){
         console.log("");
-        response.status(422).send("ERROR 400: Faulty input data.");
+        response.status(422).send("ERROR 422: Faulty input data.");
         return;
     }
 
