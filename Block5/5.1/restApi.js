@@ -122,7 +122,7 @@ app.get("/lends/:id", (request, response) => {
 });
 app.post("/lends", (request, response) => {
     
-    if(!request.body || !request.body.customer_id || !request.body.isbn){
+    if(!request.body || !request.body.customer_id || !request.body.isbn || request.body.isbn){
         console.log("");
         console.log("ERROR 422: Faulty data.");
         response.status(422).send("ERROR 422: Faulty data.");
