@@ -95,3 +95,15 @@ Doku-Hilfen:
 - Slidev (Code präsentieren)
 - revealjs (Code/sonstiges präsentieren)
 - remotion (Videos mit React erstellen)
+
+### Automatisches Testen
+
+**Wieso?**
+- Schnell die ganze Funktionalität einer App geprüft
+- Unbequem ohne Tests (weniger fehleranfällig)
+
+**Was für Tests gibt es?**
+- e2e-Tests (end to end) / Integrations-Tests
+    - Blackbox von aussen
+- Unit-Test
+    - Im Code, whitebox
