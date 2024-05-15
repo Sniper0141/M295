@@ -40,9 +40,10 @@ app.post("/books", (request, response) => {
         response.status(409).send("ERROR 409: This book is already in our database. Use PUT to overwrite.");
     }
 
-    if(!request.body){
+    if(!request.body || !request.body.isbn || !request.body.title || !request.body.year || !request.body.author){
         console.log("");
-        response.status(400).send("ERROR 400: Faulty input data.");
+        response.status(422).send("ERROR 400: Faulty input data.");
+        return;
     }
 
     booksList.push(request.body);
@@ -55,7 +56,7 @@ app.put("/books/:isbn", (request, response) => {
 
     if(!request.body || !request.body.isbn || !request.body.title || !request.body.year || !request.body.author){
         console.log("");
-        response.status(400).send("ERROR 400: Faulty input data.");
+        response.status(422).send("ERROR 400: Faulty input data.");
         return;
     }
     if(request.params.isbn != request.body.isbn){
@@ -85,9 +86,9 @@ app.delete("/books/:isbn", (request, response) => {
 app.patch("/books/:isbn", (request, response) => {
     let booksList = JSON.parse(fs.readFileSync("books.json", "utf-8"));
 
-    if(!request.body){
+    if(!request.body || !request.body.isbn || !request.body.title || !request.body.year || !request.body.author){
         console.log("");
-        response.status(400).send("ERROR 400: Faulty input data.");
+        response.status(422).send("ERROR 400: Faulty input data.");
         return;
     }
 
