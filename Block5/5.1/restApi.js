@@ -74,8 +74,11 @@ app.put("/books/:isbn", (request, response) => {
     fs.writeFileSync("books.json", JSON.stringify(booksList));
     response.status(201).send(request.body);
 });
-app.get("/books", (request, response) => {
-
+app.delete("/books/:isbn", (request, response) => {
+    const booksList = JSON.parse(fs.readFileSync("books.json", "utf-8"));
+    booksList.filter(book => book.isbn != request.params.isbn);
+    fs.writeFileSync("books.json", JSON.stringify(booksList));
+    response.status(200).send("Resource with ISBN " + request.params.isbn + " has been deleted. (200)");
 });
 app.get("/books", (request, response) => {
 
