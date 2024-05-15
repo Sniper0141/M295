@@ -56,12 +56,12 @@ app.put("/books/:isbn", (request, response) => {
     if(!request.body || !request.body.isbn || !request.body.title || !request.body.year || !request.body.author){
         console.log("");
         response.status(400).send("ERROR 400: Faulty input data.");
-        return
+        return;
     }
     if(request.params.isbn != request.body.isbn){
         console.log("");
         response.status(400).send("ERROR 400: ISBN in the URL does not match ISBN in json body.");
-        return
+        return;
     }
 
     if(booksList.find(book => book.isbn == request.body.isbn)){
@@ -70,6 +70,7 @@ app.put("/books/:isbn", (request, response) => {
     else{
         console.log("");
         response.status(404).send("ERROR 404: The resource with the ISBN " + request.params.isbn + " does not exist yet.");
+        return;
     }
 
     fs.writeFileSync("books.json", JSON.stringify(booksList));
@@ -82,28 +83,29 @@ app.delete("/books/:isbn", (request, response) => {
     response.status(200).send("Resource with ISBN " + request.params.isbn + " has been deleted. (200)");
 });
 app.patch("/books/:isbn", (request, response) => {
-    const booksList = JSON.parse(fs.readFileSync("books.json", "utf-8"));
+    let booksList = JSON.parse(fs.readFileSync("books.json", "utf-8"));
 
     if(!request.body){
         console.log("");
         response.status(400).send("ERROR 400: Faulty input data.");
-        return
-    }
-    if(request.body.isbn && request.params.isbn != request.body.isbn){
-        console.log("");
-        response.status(400).send("ERROR 400: ISBN in the URL does not match ISBN in json body.");
-        return
+        return;
     }
 
-    if(booksList.find(book => book.isbn == request.body.isbn)){
-        booksList.map(book => book.isbn == request.body.isbn ? request.body : book);
+    if(!booksList.find(book => book.isbn == request.params.isbn)){
+        console.log("");
+        response.status(404).send("ERROR 404: The resource with the ISBN " + request.params.isbn + " does not exist yet.");
+        return;
     }
-    else{
-        booksList.push(request.body);
-    }
+    
+    booksList = booksList.map(book => book.isbn == request.params.isbn ? {
+        isbn: (request.body.isbn ?? book.isbn),
+        title: (request.body.title ?? book.title),
+        year: (request.body.year ?? book.year),
+        author: (request.body.author ?? book.author)
+    } : book);
 
     fs.writeFileSync("books.json", JSON.stringify(booksList));
-    response.status(201).send(request.body);
+    response.status(200).send(request.body);
 });
 
 // Listen on port 3000
