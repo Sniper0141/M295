@@ -121,19 +121,29 @@ app.get("/lends/:id", (request, response) => {
     response.send(lendInfo);
 });
 app.post("/lends", (request, response) => {
-    const lendsList = JSON.parse(fs.readFileSync("lends.json", "utf-8"));
     
-    if(lendsList.find(lend => lend.id == request.body.id)){
+    if(!request.body || !request.body.customer_id || !request.body.isbn || !request.body.borrowed_at){
         console.log("");
-        console.log("ERROR 422: Resource with id " + request.body.id + " already exists.");
-        response.status(422).send("ERROR 422: Resource with id " + request.body.id + " already exists.");
+        console.log("ERROR 422: Faulty data.");
+        response.status(422).send("ERROR 422: Faulty data.");
         return;
     }
 
-    lendsList.push(request.body);
+    const lendsList = JSON.parse(fs.readFileSync("lends.json", "utf-8"));
+    let newLend = request.body;
+    newLend.id = request.body.id ?? uuidv4();
+
+    if(lendsList.find(lend => lend.id == newLend.id)){
+        console.log("");
+        console.log("ERROR 422: Resource with id " + newLend.id + " already exists.");
+        response.status(422).send("ERROR 422: Resource with id " + newLend.id + " already exists.");
+        return;
+    }
+
+    lendsList.push(newLend);
     
     fs.writeFileSync("lends.json", JSON.stringify(lendsList));
-    response.status(200).send(request.body);
+    response.status(200).send(newLend);
 });
 app.delete("/lends/:id", (request, response) => {
     let lendsList = JSON.parse(fs.readFileSync("lends.json", "utf-8"));
