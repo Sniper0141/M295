@@ -80,3 +80,18 @@ https://www.zli.ch/kurse/2?key=value&key2=value2#anchor
 ### Ports
 - http: 80
 - https: 443
+
+### API Dokumentationen
+
+Dokus für RestAPIs
+
+Doku-Hilfen:
+- OpenAPI
+- Swagger (Spotify benutzt das)
+- GraphQL (selbst-dokumentierend)
+
+### Präsentationen Empfehlungen
+
+- Slidev (Code präsentieren)
+- revealjs (Code/sonstiges präsentieren)
+- remotion (Videos mit React erstellen)
