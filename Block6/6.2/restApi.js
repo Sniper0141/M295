@@ -1,6 +1,7 @@
 import fs from 'fs'
 import express, { response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
+import swaggerAutogen from 'swagger-autogen';
 
 const port = 3000;
 const app = express();
@@ -175,3 +176,18 @@ app.listen(port, ()=>{
     console.log("");
     console.log(`RestAPI app listening on port ${port}`);
 });
+
+/*
+// Swagger docs
+*/
+const doc = {
+    info: {
+        title: 'Library',
+        description: 'Meine tolle Bibliothek API'
+    },
+    host: 'localhost:3000'
+};
+const outputfile = "./swagger-output.json";
+const routes = ["./restApi.js"];
+
+swaggerAutogen()(outputfile, routes, doc);
