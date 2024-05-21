@@ -1,0 +1,16 @@
+[
+    {
+        "id": "9d1f68e0-7fb6-4ae0-902c-c4a2d3548886",
+        "customer_id": 1,
+        "isbn": 9783498038083,
+        "borrowed_at": "15.5.2024, 11:42:27",
+        "returned_at": null
+    },
+    {
+        "id": "2ebe2cc0-2692-4a03-a6e2-d9ba3fcc1a72",
+        "customer_id": 2,
+        "isbn": 9783451360008,
+        "borrowed_at": "15.5.2024, 11:42:27",
+        "returned_at": null
+    }
+]
