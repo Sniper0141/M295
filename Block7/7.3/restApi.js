@@ -127,8 +127,8 @@ app.patch("/books/:isbn", (request, response) => {
 });
 
 app.get("/lends", (request, response) => {
-    if(!validateLogin(userEmail, userPassword)){
-        response.status(400).send("ERROR 400: Invalid input data.");
+    if(!authenticated){
+        response.status(401).send("ERROR 401: Not authenticated.")
         return;
     }
 
@@ -136,8 +136,8 @@ app.get("/lends", (request, response) => {
     response.send(lendsList);
 });
 app.get("/lends/:id", (request, response) => {
-    if(!validateLogin(userEmail, userPassword)){
-        response.status(400).send("ERROR 400: Invalid input data.");
+    if(!authenticated){
+        response.status(401).send("ERROR 401: Not authenticated.")
         return;
     }
 
@@ -146,8 +146,8 @@ app.get("/lends/:id", (request, response) => {
     response.send(lendInfo);
 });
 app.post("/lends", (request, response) => {
-    if(!validateLogin(userEmail, userPassword)){
-        response.status(400).send("ERROR 400: Invalid input data.");
+    if(!authenticated){
+        response.status(401).send("ERROR 401: Not authenticated.")
         return;
     }
     
@@ -176,8 +176,8 @@ app.post("/lends", (request, response) => {
     response.status(200).send(newLend);
 });
 app.delete("/lends/:id", (request, response) => {
-    if(!validateLogin(userEmail, userPassword)){
-        response.status(400).send("ERROR 400: Invalid input data.");
+    if(!authenticated){
+        response.status(401).send("ERROR 401: Not authenticated.")
         return;
     }
 
