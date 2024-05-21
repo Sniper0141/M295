@@ -107,3 +107,15 @@ Doku-Hilfen:
     - Blackbox von aussen
 - Unit-Test
     - Im Code, whitebox
+
+## Tag 4
+
+### Base64
+
+Base 64 ist eine Art, Binärdaten in Text umzuwandeln.
+
+- **atob()** -> *"from a to b"*
+    - Base64 String zu Binary
+- **btoa()** -> *from b to a*
+    - Binary zu Base64 String
+
