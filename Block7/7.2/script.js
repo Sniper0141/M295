@@ -15,15 +15,13 @@ app.use(session({
 app.use(express.json());
 
 app.post("/name", (request, response) => {
-    const { name } = request.body;
-
-    if(!name){
+    if(!request.body.name){
         response.status(400).send("ERROR 400: Bad request.");
         return;
     }
 
-    request.session.name = name;
-    response.send("Name '" + name + "' saved in session");
+    request.session.name = request.body.name;
+    response.send("Name '" + request.body.name + "' saved in session");
 });
 app.get("/name", (request, response) => {
     if(!request.session.name){
