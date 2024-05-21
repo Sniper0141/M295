@@ -128,7 +128,7 @@ app.patch("/books/:isbn", (request, response) => {
 
 app.get("/lends", (request, response) => {
     if(!authenticated){
-        response.status(401).send("ERROR 401: Not authenticated.")
+        response.status(401).send("ERROR 401: Not authenticated.");
         return;
     }
 
@@ -137,7 +137,7 @@ app.get("/lends", (request, response) => {
 });
 app.get("/lends/:id", (request, response) => {
     if(!authenticated){
-        response.status(401).send("ERROR 401: Not authenticated.")
+        response.status(401).send("ERROR 401: Not authenticated.");
         return;
     }
 
@@ -147,7 +147,7 @@ app.get("/lends/:id", (request, response) => {
 });
 app.post("/lends", (request, response) => {
     if(!authenticated){
-        response.status(401).send("ERROR 401: Not authenticated.")
+        response.status(401).send("ERROR 401: Not authenticated.");
         return;
     }
     
@@ -177,7 +177,7 @@ app.post("/lends", (request, response) => {
 });
 app.delete("/lends/:id", (request, response) => {
     if(!authenticated){
-        response.status(401).send("ERROR 401: Not authenticated.")
+        response.status(401).send("ERROR 401: Not authenticated.");
         return;
     }
 
@@ -222,7 +222,7 @@ app.post("/login", (request, response) => {
 });
 app.get("/verify", (request, response) => {
     if(!authenticated){
-        response.status(401).send("ERROR 401: Not authenticated.")
+        response.status(401).send("ERROR 401: Not authenticated.");
         return;
     }
 
@@ -230,7 +230,7 @@ app.get("/verify", (request, response) => {
 });
 app.delete("/logout", (request, response) => {
     if(!authenticated){
-        response.status(400).send("ERROR 400: Alread logged out.")
+        response.status(400).send("ERROR 400: Alread logged out.");
     }
 
     authenticated = false;
