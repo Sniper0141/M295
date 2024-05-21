@@ -9,9 +9,9 @@ const port = 3000;
 const app = express();
 
 const options = {
-  swaggerOptions: {
-    url: 'localhost:3000/swagger.json',
-  },
+    swaggerOptions: {
+        url: 'localhost:3000/swagger.json',
+    },
 };
 
 app.use(express.json());
