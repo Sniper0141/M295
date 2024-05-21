@@ -1,5 +1,5 @@
 import fs from 'fs'
-import express, { response } from 'express';
+import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import swaggerAutogen from 'swagger-autogen';
 import swaggerUi from 'swagger-ui-express';
