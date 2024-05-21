@@ -27,4 +27,5 @@ module.exports = {
     'no-console': 0,
     'import/no-extraneous-dependencies': 0,
   },
+  "indent": ["error", "tab"]
 };
