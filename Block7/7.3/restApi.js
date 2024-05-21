@@ -203,7 +203,7 @@ app.post("/login", (request, response) => {
 });
 app.get("/verify", (request, response) => {
     if(!authenticated){
-        response.status(406).send("ERROR 406: Not authenticated.")
+        response.status(401).send("ERROR 401: Not authenticated.")
         return;
     }
 

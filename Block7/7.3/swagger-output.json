@@ -302,8 +302,8 @@
           "200": {
             "description": "OK"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
