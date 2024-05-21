@@ -187,6 +187,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -219,6 +222,9 @@
           "200": {
             "description": "OK"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "422": {
             "description": "Unprocessable Entity"
           }
@@ -239,6 +245,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },

@@ -127,15 +127,29 @@ app.patch("/books/:isbn", (request, response) => {
 });
 
 app.get("/lends", (request, response) => {
+    if(!validateLogin(userEmail, userPassword)){
+        response.status(400).send("ERROR 400: Invalid input data.");
+        return;
+    }
+
     const lendsList = JSON.parse(fs.readFileSync("lends.json", "utf-8"));
     response.send(lendsList);
 });
 app.get("/lends/:id", (request, response) => {
+    if(!validateLogin(userEmail, userPassword)){
+        response.status(400).send("ERROR 400: Invalid input data.");
+        return;
+    }
+
     const lendsList = JSON.parse(fs.readFileSync("lends.json", "utf-8"));
     const lendInfo = lendsList.find(lend => lend.id == request.params.id);
     response.send(lendInfo);
 });
 app.post("/lends", (request, response) => {
+    if(!validateLogin(userEmail, userPassword)){
+        response.status(400).send("ERROR 400: Invalid input data.");
+        return;
+    }
     
     if(!request.body || !request.body.customer_id || !request.body.isbn || request.body.isbn){
         console.log("");
@@ -162,6 +176,11 @@ app.post("/lends", (request, response) => {
     response.status(200).send(newLend);
 });
 app.delete("/lends/:id", (request, response) => {
+    if(!validateLogin(userEmail, userPassword)){
+        response.status(400).send("ERROR 400: Invalid input data.");
+        return;
+    }
+
     let lendsList = JSON.parse(fs.readFileSync("lends.json", "utf-8"));
     let turnedInLend = lendsList.find(lend => lend.id == request.params.id)
 
