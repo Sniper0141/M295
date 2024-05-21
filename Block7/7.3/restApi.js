@@ -17,8 +17,10 @@ var options = {
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
-// user
-let userName;
+// auth
+let authenticated;
+let userEmail;
+let userPassword;
 
 // Endpoints
 app.get("/books", (request, response) => {
@@ -190,8 +192,18 @@ app.post("/login", (request, response) => {
         return;
     }
 
-    userName = request.body.email;
+    authenticated = true;
+    userEmail = request.body.email;
+    userPassword = request.body.password;
     response.send("Logged in.");
+});
+app.get("/verify", (request, response) => {
+    if(!authenticated){
+        response.status(406).send("ERROR 406: Not authenticated.")
+        return;
+    }
+
+    response.status(200).send(userEmail + " " + userPassword);
 });
 
 // Listen on port 3000
