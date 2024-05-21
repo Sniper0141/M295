@@ -1,10 +1,10 @@
-import fs from 'fs';
+import fs, { readFileSync } from 'fs';
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import swaggerAutogen from 'swagger-autogen';
 import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from './swagger-output.json';
 
+const swaggerDocument = JSON.parse(readFileSync('./swagger-output.json'));
 const port = 3000;
 const app = express();
 
