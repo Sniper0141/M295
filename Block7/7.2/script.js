@@ -14,17 +14,16 @@ app.use(session({
 }));
 app.use(express.json());
 
-app.post("/name", (req, res) => {
-
-    const { name } = req.body;
+app.post("/name", (request, response) => {
+    const { name } = request.body;
 
     if(!name){
-        res.status(400).send("ERROR 400: Bad request.");
+        response.status(400).send("ERROR 400: Bad request.");
         return;
     }
 
-    req.session.name = name;
-    res.send("Name '" + name + "' saved in session");
+    request.session.name = name;
+    response.send("Name '" + name + "' saved in session");
 });
 app.get("/name", (request, response) => {
     if(!request.session.name){
@@ -34,6 +33,10 @@ app.get("/name", (request, response) => {
 
     console.log(request.session.name);
     response.send(request.session.name);
+});
+app.delete("/name", (request, response) => {
+    request.session.name = "";
+    response.status(204).send();
 });
 
 app.listen(port, () => {
