@@ -188,14 +188,18 @@ app.delete("/lends/:id", (request, response) => {
 // Session
 app.post("/login", (request, response) => {    
     if(!request.body.email || !request.body.password){
-        response.status(400).send("ERROR 400: Faulty input data.");
+        response.status(400).send("ERROR 400: Invalid input data.");
+        return;
+    }
+    if(!validateLogin(request.body.email, request.body.password)){
+        response.status(400).send("ERROR 400: Invalid input data.");
         return;
     }
 
     authenticated = true;
     userEmail = request.body.email;
     userPassword = request.body.password;
-    response.send("Logged in.");
+    response.status(201).send({ email: userEmail, password: userPassword });
 });
 app.get("/verify", (request, response) => {
     if(!authenticated){
@@ -216,6 +220,14 @@ app.delete("/logout", (request, response) => {
 
     response.status(204).send();
 });
+
+function validateLogin(email, password){
+    if(email == "desk@library.example" && password == "m295"){
+        return true;
+    }
+
+    return false;
+}
 
 
 // Listen on port 3000
