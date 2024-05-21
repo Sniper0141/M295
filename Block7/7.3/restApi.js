@@ -18,7 +18,7 @@ app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
 // auth
-let authenticated;
+let authenticated = false;
 let userEmail;
 let userPassword;
 
@@ -205,6 +205,18 @@ app.get("/verify", (request, response) => {
 
     response.status(200).send(userEmail + " " + userPassword);
 });
+app.delete("/logout", (request, response) => {
+    if(!authenticated){
+        response.status(400).send("ERROR 400: Alread logged out.")
+    }
+
+    authenticated = false;
+    userEmail = null;
+    userPassword = null;
+
+    response.status(204).send();
+});
+
 
 // Listen on port 3000
 app.listen(port, ()=>{
